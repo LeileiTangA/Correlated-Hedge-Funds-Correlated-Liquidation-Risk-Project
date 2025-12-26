@@ -1,0 +1,8 @@
+ascii data files = "C:\OLSHazard\ANNHazard_YearTrend.raw";
+
+level 1 var = weight;
+
+	level 2 var = Event DropID Year1992 Lower Upper;
+
+        level 3 var = t DistL DistH Ret Volt Aum Flow    /*Level 3 Variable*/
+		         VIX CSprd AggLq InnLq TrdLq CRSP;

@@ -1,0 +1,40 @@
+
+option title = "Hedge Fund_of_Fund Liquidation FCM-GRNN Analysis";
+option maximum scratch data space = 6604;
+option table format;
+option normweight = weight;
+
+dsn = "C:\OLSHazard\ANNHazardaML_FoF_YearTrend.dat";
+
+/* Liquidation Suvival Hazard Equation */
+
+define spline DurAttr; nodes =  4 7;
+define spline YearTime; nodes = 9 16;
+
+define regressor set AlphaX;
+	var = 1 DistL/DistH Ret*100 Volt log(Aum) Flow*100;
+
+hazard model; keep if DropID <=1; 
+        /* For Lquidated funds only */
+	censor=1-Event;
+	duration=Lower Upper;
+	timemarks=t;
+	model=durspline(origin=0,ref=DurAttr)+ 
+	      durspline(origin=Year1992,ref=YearTime)+
+	      regset AlphaX;  
+
+starting values;
+slope0      TT   1
+slope1      TT   0
+slope2      TT   0
+trend0      TT   0
+trend1      TT   .6
+trend2      TT   -0.5
+Constant    TT   -6.0
+Distance    FT     0
+Return      FT     0
+Volat       FT     0
+Aum         FT     0
+Flow        FT     0
+;
+;

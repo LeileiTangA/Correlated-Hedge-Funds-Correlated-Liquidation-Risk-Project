@@ -1,0 +1,8 @@
+ascii data files = "C:\OLSHazard\CCATest\ANNHazard_YearTrend_CCA.raw";
+
+level 1 var = weight;
+
+	level 2 var = Event DropID Year1992 Lower Upper;
+
+        level 3 var = t DistL DistH CorrT CorrB Ret Volt Aum Flow  /*Level 3 Variable*/
+		        VIX CSprd AggLq InnLq TrdLq CRSP CrTB CrBT;
